@@ -1,0 +1,15 @@
+---
+- name: Bootstrap Chocolatey installation
+  hosts: windows
+  tasks:
+    - name: Check if Chocolatey is installed
+      win_stat:
+        path: C:\ProgramData\chocolatey
+      register: choco_installed
+
+    - name: Install Chocolatey if not present
+      win_shell: |
+        Set-ExecutionPolicy Bypass -Scope Process -Force;
+        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+        iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+      when: not choco_installed.stat.exists
