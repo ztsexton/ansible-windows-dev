@@ -1,15 +1,31 @@
 ---
 - name: Bootstrap Chocolatey installation
   hosts: windows
+  collections:
+    - ansible.windows
   tasks:
-    - name: Check if Chocolatey is installed
-      win_stat:
-        path: C:\ProgramData\chocolatey
-      register: choco_installed
+      - name: Ensure Chocolatey installed from internal repo
+        win_chocolatey:
+          name: chocolatey
+          state: present
+          source: http://internal/odata/repo/ChocolateyInstall.ps1
 
-    - name: Install Chocolatey if not present
-      win_shell: |
-        Set-ExecutionPolicy Bypass -Scope Process -Force;
-        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
-        iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-      when: not choco_installed.stat.exists
+      - name: Install git
+        win_chocolatey:
+          name: git
+          state: present
+
+      - name: Install vscode
+        win_chocolatey:
+          name: vscode
+          state: present
+
+      - name: Get the current user PATH
+        win_environment:
+          name: PATH
+          level: user
+        register: user_path
+        ignore_errors: yes
+
+      - name: Print path
+        debug: msg='{{user_path}}'
