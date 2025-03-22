@@ -1,31 +1,29 @@
 ---
-- name: Bootstrap Chocolatey installation
-  hosts: windows
-  collections:
-    - ansible.windows
-  tasks:
-      - name: Ensure Chocolatey installed from internal repo
-        win_chocolatey:
-          name: chocolatey
-          state: present
-          source: http://internal/odata/repo/ChocolateyInstall.ps1
+- name: Install git
+  chocolatey.chocolatey.win_chocolatey:
+    name: git
+    state: present
 
-      - name: Install git
-        win_chocolatey:
-          name: git
-          state: present
+- name: Install Postman
+  chocolatey.chocolatey.win_chocolatey:
+    name: postman
+    state: present
 
-      - name: Install vscode
-        win_chocolatey:
-          name: vscode
-          state: present
+- name: Install Wireshark
+  chocolatey.chocolatey.win_chocolatey:
+    name: wireshark
+    state: present
 
-      - name: Get the current user PATH
-        win_environment:
-          name: PATH
-          level: user
-        register: user_path
-        ignore_errors: yes
+- name: Install HTTP Toolkit
+  chocolatey.chocolatey.win_chocolatey:
+    name: httptoolkit
+    state: present
 
-      - name: Print path
-        debug: msg='{{user_path}}'
+- name: Install Docker Desktop
+  chocolatey.chocolatey.win_chocolatey:
+    name: docker-desktop
+    state: present
+    ignore_checksums: true
+
+- name: Include IDE installation tasks
+  ansible.builtin.include_tasks: ides.yml

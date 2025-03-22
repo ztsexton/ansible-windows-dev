@@ -1,0 +1,33 @@
+---
+- name: Install Personal Windows Software
+  hosts: windows
+  tasks:
+      - name: Ensure Chocolatey installed from internal repo
+        chocolatey.chocolatey.win_chocolatey:
+            name: chocolatey
+            state: present
+            source: http://internal/odata/repo/ChocolateyInstall.ps1
+
+      - name: Include browser installation tasks
+        ansible.builtin.include_tasks: browsers.yml
+
+      - name: Install development Software
+        ansible.builtin.include_tasks: dev_software.yml
+
+      - name: Include Game Software installation tasks
+        ansible.builtin.include_tasks: game_software.yml
+
+      - name: Install Logseq
+        chocolatey.chocolatey.win_chocolatey:
+            name: logseq
+            state: present
+
+      - name: Install Equalizer APO
+        chocolatey.chocolatey.win_chocolatey:
+            name: equalizerapo
+            state: present
+
+      - name: Install "Everything" Search Tool
+        chocolatey.chocolatey.win_chocolatey:
+            name: everything
+            state: present
