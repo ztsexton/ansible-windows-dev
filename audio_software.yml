@@ -44,8 +44,10 @@
         Filter 19: OFF None
         Filter 20: OFF None
 
+# Make sure EqualizerAPO configs are running
 - name: Restart Windows Audio Endpoint Builder Service
   ansible.windows.win_service:
+      # Windows Audio Service will restart with this service
       name: AudioEndpointBuilder
       state: restarted
       force_dependent_services: yes
