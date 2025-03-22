@@ -2,54 +2,54 @@
 - name: Install VS Code
   chocolatey.chocolatey.win_chocolatey:
     name: vscode
-    state: present
+    state: latest
 
 - name: Install JetBrains Toolbox
   chocolatey.chocolatey.win_chocolatey:
     name: jetbrainstoolbox
-    state: present
+    state: latest
 
 - name: Install WebStorm
   chocolatey.chocolatey.win_chocolatey:
     name: webstorm
-    state: present
+    state: latest
 
 - name: Install Rider
   chocolatey.chocolatey.win_chocolatey:
     name: jetbrains-rider
-    state: present
+    state: latest
 
 - name: Install PyCharm
   chocolatey.chocolatey.win_chocolatey:
     name: pycharm
-    state: present
+    state: latest
 
 - name: Install IntelliJ IDEA
   chocolatey.chocolatey.win_chocolatey:
     name: intellijidea-ultimate
-    state: present
+    state: latest
 
 - name: Install GoLand
   chocolatey.chocolatey.win_chocolatey:
     name: goland
-    state: present
+    state: latest
 
 - name: Install CLion
   chocolatey.chocolatey.win_chocolatey:
     name: clion-ide
-    state: present
+    state: latest
 
 - name: Install DataGrip
   chocolatey.chocolatey.win_chocolatey:
     name: datagrip
-    state: present
+    state: latest
 
 - name: Install RubyMine
   chocolatey.chocolatey.win_chocolatey:
     name: rubymine
-    state: present
+    state: latest
 
 - name: Install Rust Rover
   chocolatey.chocolatey.win_chocolatey:
     name: rustrover
-    state: present
+    state: latest

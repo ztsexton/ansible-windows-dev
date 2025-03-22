@@ -2,7 +2,7 @@
 - name: Install Chrome
   chocolatey.chocolatey.win_chocolatey:
     name: googlechrome
-    state: present
+    state: latest
     # Not ideal, but probably fine for personal use. Would not recommend for production.
     # Chrome updates too often and doesn't have versioned URLs.
     ignore_checksums: true
@@ -10,14 +10,14 @@
 - name: Install Firefox
   chocolatey.chocolatey.win_chocolatey:
     name: firefox
-    state: present
+    state: latest
 
 - name: Install Chromium
   chocolatey.chocolatey.win_chocolatey:
     name: chromium
-    state: present
+    state: latest
 
 - name: Install Microsoft Edge
   chocolatey.chocolatey.win_chocolatey:
     name: microsoft-edge
-    state: present
+    state: latest

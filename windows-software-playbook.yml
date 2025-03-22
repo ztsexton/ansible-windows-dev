@@ -17,14 +17,12 @@
       - name: Include Game Software installation tasks
         ansible.builtin.include_tasks: game_software.yml
 
+      - name: Include Audio Software installation tasks
+        ansible.builtin.include_tasks: audio_software.yml
+
       - name: Install Logseq
         chocolatey.chocolatey.win_chocolatey:
             name: logseq
-            state: present
-
-      - name: Install Equalizer APO
-        chocolatey.chocolatey.win_chocolatey:
-            name: equalizerapo
             state: present
 
       - name: Install "Everything" Search Tool

@@ -1,0 +1,51 @@
+---
+- name: Install Equalizer APO
+  chocolatey.chocolatey.win_chocolatey:
+      name: equalizerapo
+      state: present
+
+- name: Ensure EqualizerAPO config.txt has the correct settings
+  ansible.windows.win_copy:
+      dest: 'C:\\Program Files\\EqualizerAPO\\config\\config.txt'
+      content: |
+        Preamp: -6 dB
+        Include: hifiman_sundara.txt
+
+- name: Ensure hifiman_undara.txt has the correct settings
+  ansible.windows.win_copy:
+      dest: 'C:\\Program Files\\EqualizerAPO\\config\\hifiman_sundara.txt'
+      content: |
+        Filter Settings file
+
+        Hifiman Sundara EQ by oratory1990
+        Dated: 21.03.2025
+        Notes:Sundara
+
+        Equaliser: Generic
+        No measurement
+        Filter  1: ON  PK       Fc   105,0 Hz  Gain   2,5 dB  Q  0,80
+        Filter  2: ON  PK       Fc   550,0 Hz  Gain  -1,5 dB  Q  1,00
+        Filter  3: ON  PK       Fc  2000,0 Hz  Gain  -3,0 dB  Q  2,00
+        Filter  4: ON  PK       Fc  4000,0 Hz  Gain   4,0 dB  Q  3,00
+        Filter  5: ON  PK       Fc  6000,0 Hz  Gain  -2,5 dB  Q  4,00
+        Filter  6: ON  PK       Fc  8000,0 Hz  Gain   3,5 dB  Q  5,00
+        Filter  7: ON  PK       Fc 10000,0 Hz  Gain  -1,0 dB  Q  6,00
+        Filter  8: OFF None
+        Filter  9: OFF None
+        Filter 10: OFF None
+        Filter 11: OFF None
+        Filter 12: OFF None
+        Filter 13: OFF None
+        Filter 14: OFF None
+        Filter 15: OFF None
+        Filter 16: OFF None
+        Filter 17: OFF None
+        Filter 18: OFF None
+        Filter 19: OFF None
+        Filter 20: OFF None
+
+- name: Restart Windows Audio Endpoint Builder Service
+  ansible.windows.win_service:
+      name: AudioEndpointBuilder
+      state: restarted
+      force_dependent_services: yes
