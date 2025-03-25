@@ -1,0 +1,6 @@
+---
+- name: Install WSL Software
+  hosts: local
+  tasks:
+      - name: Install .NET SDK
+        ansible.builtin.import_tasks: tasks/dotnet-sdk.yml
