@@ -4,3 +4,6 @@
   tasks:
       - name: Install .NET SDK
         ansible.builtin.import_tasks: tasks/dotnet-sdk.yml
+
+      - name: Install NVM
+        ansible.builtin.import_tasks: tasks/nvm.yml
