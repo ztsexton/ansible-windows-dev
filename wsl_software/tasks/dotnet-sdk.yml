@@ -1,0 +1,23 @@
+- name: Add dotnet backports PPA key
+  become: true
+  ansible.builtin.apt_key:
+      keyserver: keyserver.ubuntu.com
+      id: 45A3F127159BE9E5017811C62125B164E8E5D3FA
+      keyring: /etc/apt/trusted.gpg.d/dotnet_backports.gpg
+
+- name: Set up dotnet repository for apt
+  become: true
+  ansible.builtin.apt_repository:
+      repo: ppa:dotnet/backports
+      state: present
+
+- name: Apt update
+  become: true
+  ansible.builtin.apt:
+      update_cache: true
+
+- name: Install .NET 9 SDK
+  become: true
+  ansible.builtin.apt:
+      name: dotnet-sdk-9.0
+      state: present
