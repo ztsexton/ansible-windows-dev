@@ -9,16 +9,16 @@
             source: http://internal/odata/repo/ChocolateyInstall.ps1
 
       - name: Include browser installation tasks
-        ansible.builtin.include_tasks: browsers.yml
+        ansible.builtin.include_tasks: tasks/browsers.yml
 
       - name: Install development Software
-        ansible.builtin.include_tasks: dev_software.yml
+        ansible.builtin.include_tasks: tasks/dev_software.yml
 
       - name: Include Game Software installation tasks
-        ansible.builtin.include_tasks: game_software.yml
+        ansible.builtin.include_tasks: tasks/game_software.yml
 
       - name: Include Audio Software installation tasks
-        ansible.builtin.include_tasks: audio_software.yml
+        ansible.builtin.include_tasks: tasks/audio_software.yml
 
       - name: Install Logseq
         chocolatey.chocolatey.win_chocolatey:
