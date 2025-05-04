@@ -1,9 +1,14 @@
 ---
 - name: Install WSL Software
   hosts: local
+  become: true
+  become_method: ansible.builtin.sudo
   tasks:
-      - name: Install .NET SDK
-        ansible.builtin.import_tasks: tasks/dotnet-sdk.yml
+      # - name: Install .NET SDK
+      #   ansible.builtin.import_tasks: tasks/dotnet-sdk.yml
 
       - name: Install NVM
         ansible.builtin.import_tasks: tasks/nvm.yml
+
+      - name: Install golang SDK
+        ansible.builtin.import_tasks: tasks/golang_sdk.yml

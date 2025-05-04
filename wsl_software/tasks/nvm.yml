@@ -1,24 +1,33 @@
+- name: Check if NVM is installed
+  ansible.builtin.command: bash -ic "nvm --version"
+  register: nvm_check
+  ignore_errors: true
+  changed_when: false
+  become: false
+
 - name: Create temp directory for NVM installer
   ansible.builtin.file:
       path: "{{ ansible_env.HOME }}/.ansible/tmp"
       state: directory
       mode: '0755'
 
-- name: Install and configure NVM
-  block:
-      - name: Download NVM installer
-        ansible.builtin.get_url:
-            url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh
-            dest: "{{ ansible_env.HOME }}/.ansible/tmp/nvm-install.sh"
-            mode: '0755'
-            force: false
+- name: Download NVM installer
+  ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh
+      dest: "{{ ansible_env.HOME }}/.ansible/tmp/nvm-install.sh"
+      mode: '0755'
+      force: false
+  when: nvm_check is failed
 
-      - name: Install NVM
-        ansible.builtin.script: "{{ ansible_env.HOME }}/.ansible/tmp/nvm-install.sh"
-        args:
-            creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
-  always:
-      - name: Clean up NVM installer
-        ansible.builtin.file:
-            path: "{{ ansible_env.HOME }}/.ansible/tmp/nvm-install.sh"
-            state: absent
+- name: Install NVM
+  ansible.builtin.script: "{{ ansible_env.HOME }}/.ansible/tmp/nvm-install.sh"
+  args:
+      creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+  become: false
+  when: nvm_check is failed
+
+- name: Clean up NVM installer
+  ansible.builtin.file:
+      path: "{{ ansible_env.HOME }}/.ansible/tmp/nvm-install.sh"
+      state: absent
+  when: nvm_check is failed

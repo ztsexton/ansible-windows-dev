@@ -25,5 +25,15 @@
     state: present
     ignore_checksums: true
 
+- name: Install Visual Studio Code
+  chocolatey.chocolatey.win_chocolatey:
+    name: vscode
+    state: latest
+
+- name: Install dotnet sdk
+  chocolatey.chocolatey.win_chocolatey:
+    name: dotnet-sdk
+    state: latest
+
 - name: Include IDE installation tasks
   ansible.builtin.include_tasks: ides.yml

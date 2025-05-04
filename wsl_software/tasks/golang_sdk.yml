@@ -1,0 +1,8 @@
+# Download from this url https://go.dev/dl/
+
+- name: Install golang
+  ansible.builtin.apt:
+    name: golang-go
+    state: present
+    update_cache: true
+  become: true

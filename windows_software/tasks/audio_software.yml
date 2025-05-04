@@ -50,4 +50,4 @@
       # Windows Audio Service will restart with this service
       name: AudioEndpointBuilder
       state: restarted
-      force_dependent_services: yes
+      force_dependent_services: true
